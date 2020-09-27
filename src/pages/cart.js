@@ -4,7 +4,7 @@ import Hello from '../components/Hello/hello'
 
 export default class Cart extends Component {
     constructor(props) {
-        super(props);
+        super();
         this.state = { }
     }
     render() {
