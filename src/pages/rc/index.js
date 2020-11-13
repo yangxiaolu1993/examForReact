@@ -2,15 +2,14 @@
 
 import Animate from 'rc-animate';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import velocity from 'velocity-animate';
 
-import './assets/index.less';
+import '../../assets/index.less';
 
 const Box = props => {
   const style = {
     width: '200px',
-    display: props.visible ? 'block' : 'none',
+    display: props.show ? 'block' : 'none',
     height: '200px',
     backgroundColor: 'red',
   };
@@ -18,11 +17,16 @@ const Box = props => {
 };
 
 class Rc extends React.Component {
-  state = {
-    destroyed: false,
-    visible: true,
-    exclusive: false,
+  constructor(props){
+    super(props)
+    this.myRef = React.createRef();
+    this.state = {
+      destroyed: false,
+      visible: true,
+      exclusive: false,
+    }
   }
+  
 
   toggleAnimate = () => {
     this.setState({
@@ -92,6 +96,13 @@ class Rc extends React.Component {
     });
   }
 
+  change = ()=>{
+      const a = this.state.visible
+      this.setState({
+        visible:!a
+      })
+  }
+
   render() {
     const anim = {
       enter: this.animateEnter,
@@ -100,30 +111,22 @@ class Rc extends React.Component {
 
     return (
       <div>
-        <label><input
-          type="checkbox"
-          onChange={this.toggle.bind(this, 'visible')}
-          checked={this.state.visible}
-        />
-          show</label>
-        &nbsp;
-        <label><input
-          type="checkbox"
-          onChange={this.toggle.bind(this, 'exclusive')}
-          checked={this.state.exclusive}
-        />
-          exclusive</label>
-        &nbsp;
-        <button onClick={this.destroy}>destroy</button>
-        <br/><br/>
+        <div onClick={this.change}>点击</div>
         <Animate
           component=""
-          exclusive={this.state.exclusive}
-          showProp="visible"
-          animation={anim}
+          showProp="show"
+          transitionName="fade"
         >
-          {this.state.destroyed ? null : <Box visible={this.state.visible}/>}
+          {/* {this.state.destroyed ? null : <Box show={this.state.visible}/>} */}
+         <div show={this.state.visible} style={{
+                width: '200px',
+                display: this.state.visible ? 'block' : 'none',
+                height: '200px',
+                backgroundColor: 'red',
+            }}></div>
         </Animate>
+
+        <div ref={this.myRef} />
       </div>
     );
   }
