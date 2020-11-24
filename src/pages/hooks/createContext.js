@@ -2,7 +2,7 @@ import React from 'react'
 import './hooks.less'
 
 const ThemeContext = React.createContext('light')
-class App extends React.Component {
+class CreateContext extends React.Component {
     render(){
         return (
             <div className="context">
@@ -28,4 +28,4 @@ class Btn extends React.Component {
     }
 }
 
-export default App
+export default CreateContext

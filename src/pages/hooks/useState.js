@@ -47,9 +47,6 @@ function SetState (){
                 )}/>
             </div>
             
-            
-
-            
         </React.Fragment>
         
     )
